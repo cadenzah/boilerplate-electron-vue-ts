@@ -9,16 +9,17 @@ module.exports = (env) => {
   const envKeys = require('./env')(env)
 
   // file paths
-  const configPath = path.join(__dirname);
+  const configPath = path.join(__dirname); // path for webpack.config.js
+  const appPath = path.join(configPath, '..', 'app');
   const buildPath = path.join(configPath, '..', 'build');
-  const srcPath = path.join(configPath, '..', 'src');
-  const publicPath = process.env.PUBLIC_PATH;
+  const srcPath = path.join(appPath, 'src');
+  const publicPath = process.env.PUBLIC_PATH; // './', '/'
 
   const config = {
     entry: [
       'core-js/stable',
       'regenerator-runtime/runtime',
-      './src/main.ts'
+      `${srcPath}/main.ts`
     ],
     output: {
       publicPath: publicPath ? publicPath : '/',
@@ -87,7 +88,7 @@ module.exports = (env) => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: './public/index.html',
+        template: `${appPath}/public/index.html`,
       }),
       new VueLoaderPlugin(),
       new webpack.DefinePlugin(envKeys.stringified),
