@@ -24,7 +24,8 @@ export default class App extends Vue {
   public message: string = '';
 
   created() {
-    console.log(this);
+    // Electron's initial route path has to be set manually
+    this.$router.push('/');
   }
 }
 </script>
