@@ -10,7 +10,7 @@
 
 <a name="library-used"></a>
 ## Library used
-- Electron v12
+- Electron v11.3.0
 - TypeScript v4.2
 
 <a name="directory-structure"></a>
@@ -18,10 +18,13 @@
 
 ```md
 /
-|- configs/       : Configuration files for compile, build
-  |- env/         : Environment variables (User-defined `.env` file goes here)
-|- app/           : Application run on Electron 
-|- main.ts        : Main entry logic for Electron Application
+|- configs/           : Configuration files for building Vue.ts
+  |- env/             : Environment variables (User-defined `.env` file goes here)
+|- src/               : Source files for Electron project
+  |- app/             : Renderer process application run on Electron (Vue.ts)
+  |- main/            : Main process logic for Electron
+|- tsconfig.json      : TypeScript config for `app`
+|- tsconfig.main.json : TypeScript config for `main`
 ```
 
 <a name="preparation"></a>
@@ -42,13 +45,17 @@ The project will inject `{ __NOT_USED__: undefined }` environment variable as `p
 <a name="how-to-use"></a>
 ## How to use
 
+### | How to build Web Application
+1. Run `npm run build:app`
+You need the app's built bundle to run Electron Application.
 ### | How to run Electron Application
-1. Build Web Application (See "How to Build")
+1. Build Web Application (See "How to build Web Application" part)
 2. Run `npm run start`
 
 ### | How to run Web Application with webpack-dev-server
 1. Run `npm run dev`
 2. Visit `http://localhost:3000` (Automatically opens)
+Utilize it for implementing purpose
 
 ### | How to run test
 1. Run `npm run test:watch`
@@ -57,6 +64,9 @@ The project will inject `{ __NOT_USED__: undefined }` environment variable as `p
 <a name="update-logs"></a>
 ## Update Logs
 
+### | v1.1.0
+- Restructured project scaffording
+- Downgraded Electron (v12.0.0 -> v11.3.0)
 ### | v1.0.0
 - Initial migration from [Vue.js with Typescript Boilerplate](https://github.com/cadenzah/boilerplate-vue-ts)
 
