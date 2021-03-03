@@ -1,4 +1,5 @@
-const { app, BrowserWindow } = require('electron')
+import { app, BrowserWindow, ipcMain } from 'electron'
+import path from 'path';
 
 function createWindow () {
   const win = new BrowserWindow({
@@ -9,7 +10,7 @@ function createWindow () {
     }
   })
 
-  win.loadFile('./build/index.html')
+  win.loadFile(path.join('..', 'app/index.html'))
 }
 
 app.whenReady().then(createWindow)
@@ -25,3 +26,9 @@ app.on('activate', () => {
     createWindow()
   }
 })
+
+ipcMain.on('test', (e, a) => {
+  console.log(a);
+});
+
+export default app;

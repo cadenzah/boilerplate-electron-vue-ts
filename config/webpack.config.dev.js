@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 const VueLoader = require('vue-loader');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
@@ -10,8 +11,8 @@ module.exports = (env) => {
 
   // file paths
   const configPath = path.join(__dirname); // path for webpack.config.js
-  const appPath = path.join(configPath, '..', 'app');
-  const buildPath = path.join(configPath, '..', 'build');
+  const appPath = path.join(configPath, '..', 'src', 'app');
+  const buildPath = path.join(configPath, '..', 'build', 'app');
   const srcPath = path.join(appPath, 'src');
   const publicPath = process.env.PUBLIC_PATH; // './', '/'
 
@@ -27,6 +28,7 @@ module.exports = (env) => {
       path: buildPath,
     },
     mode: 'development',
+    // target: 'electron-main',
     resolve: {
       extensions: [".ts", ".js", ".vue"],
       alias: {
@@ -93,6 +95,7 @@ module.exports = (env) => {
       }),
       new VueLoaderPlugin(),
       new webpack.DefinePlugin(envKeys.stringified),
+      // new NodePolyfillPlugin(),
     ],
   };
 
